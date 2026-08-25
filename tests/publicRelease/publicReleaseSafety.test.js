@@ -52,3 +52,22 @@ test("the public release contains required metadata and no private deployment ma
     }
   }
 });
+
+test("the public README explains LabPilot to non-HPLC readers without overstating the product", async () => {
+  const readme = await readFile(path.join(projectRoot, "README.md"), "utf8");
+
+  for (const requiredCopy of [
+    "HPLC 是什么",
+    "LabPilot 解决什么问题",
+    "适合谁使用",
+    "LabPilot 的核心优势",
+    "https://youli-laura.github.io/labpilot-hplc-assistant/",
+    "确定性规则",
+    "不替代 SOP、QA、偏差调查或质量结论",
+    "Copyright © You.Li. All rights reserved.",
+  ]) {
+    assert.ok(readme.includes(requiredCopy), `README is missing: ${requiredCopy}`);
+  }
+
+  assert.doesNotMatch(readme, /AI 驱动|行业领先|提升效率 \d+%|已投入生产/);
+});
