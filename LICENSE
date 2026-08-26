@@ -1,0 +1,49 @@
+LABPILOT PROPRIETARY SOURCE-AVAILABLE LICENSE
+
+Copyright © 2026 You.Li. All rights reserved.
+
+1. Ownership
+
+Except for the third-party materials identified below, the LabPilot source
+code, diagnostic rules, product copy, user-interface design, documentation,
+and related original materials in this repository are owned by You.Li and are
+protected by applicable copyright and other intellectual-property laws.
+
+2. Public review only
+
+This repository is publicly accessible to support recruitment review,
+portfolio evaluation, and technical discussion. It is source-visible but is
+not open-source software. Public availability does not grant a license to use,
+copy, modify, distribute, publish, sublicense, sell, commercialize, or create
+derivative works from the original LabPilot materials.
+
+3. Written permission required
+
+Any use beyond viewing the repository or accessing the publicly deployed
+demonstration requires prior written permission from You.Li. Permission may be
+granted under separate terms for a specific person, organization, purpose,
+and period.
+
+4. GitHub and legal exceptions
+
+Nothing in this notice limits rights expressly granted by the GitHub Terms of Service
+for hosting, displaying, or reproducing this repository through
+GitHub's functionality. Nothing in this notice restricts rights that cannot
+lawfully be excluded, including any applicable statutory exception.
+
+5. Third-party materials
+
+This license does not replace or restrict licenses attached to third-party
+materials. The bundled html2pdf.js distribution and its included dependencies
+remain governed by the notices in src/vendor/html2pdf.LICENSE.txt. Those
+third-party materials are excluded from the proprietary rights asserted above.
+
+6. No warranty
+
+THE LABPILOT MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, AND NON-INFRINGEMENT. TO THE MAXIMUM EXTENT PERMITTED BY
+LAW, THE COPYRIGHT OWNER IS NOT LIABLE FOR ANY CLAIM, LOSS, OR OTHER LIABILITY
+ARISING FROM ACCESS TO OR USE OF THE MATERIALS.
+
+For licensing enquiries, contact the repository owner through GitHub.

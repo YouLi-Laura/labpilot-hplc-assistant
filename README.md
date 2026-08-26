@@ -121,8 +121,10 @@ npm start
 npm test
 ```
 
-## Copyright
+## 版权与使用许可
 
-Copyright © You.Li. All rights reserved.
+Copyright © 2026 You.Li. All rights reserved.
 
-This repository is published for portfolio demonstration and technical exchange only. No permission is granted to copy, modify, distribute, sublicense, or use the code commercially.
+本仓库用于求职展示、作品评估与技术交流。代码公开可见，但不是开源软件。除 GitHub 服务条款或适用法律明确允许的范围外，未经 You.Li 事先书面授权，不得复制、修改、再发布、再许可、商业使用或基于本项目制作衍生产品。
+
+完整条款见 [LICENSE](./LICENSE)。仓库内的第三方组件继续适用其各自许可证；PDF 依赖的许可信息见 [第三方 MIT 许可证](./src/vendor/html2pdf.LICENSE.txt)。

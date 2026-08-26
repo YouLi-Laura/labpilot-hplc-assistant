@@ -39,6 +39,7 @@ const HOSTING_PATHS = Object.freeze([
 ]);
 
 const PRODUCT_PATHS = Object.freeze([
+  "LICENSE",
   "index.html",
   "src/demo/demoCases.js",
   "src/domain/hplcLabels.js",
