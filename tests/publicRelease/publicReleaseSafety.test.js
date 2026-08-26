@@ -53,14 +53,14 @@ test("the public release contains required metadata and no private deployment ma
   }
 });
 
-test("the public README explains LabPilot to non-HPLC readers without overstating the product", async () => {
+test("the public README explains LabPilot in direct professional language", async () => {
   const readme = await readFile(path.join(projectRoot, "README.md"), "utf8");
 
   for (const requiredCopy of [
     "HPLC 是什么",
-    "LabPilot 解决什么问题",
+    "为什么需要 LabPilot",
     "适合谁使用",
-    "LabPilot 的核心优势",
+    "核心能力",
     "https://youli-laura.github.io/labpilot-hplc-assistant/",
     "确定性规则",
     "不替代 SOP、QA、偏差调查或质量结论",
@@ -69,7 +69,10 @@ test("the public README explains LabPilot to non-HPLC readers without overstatin
     assert.ok(readme.includes(requiredCopy), `README is missing: ${requiredCopy}`);
   }
 
-  assert.doesNotMatch(readme, /AI 驱动|行业领先|提升效率 \d+%|已投入生产/);
+  assert.doesNotMatch(
+    readme,
+    /AI 驱动|不调用大模型|大模型生成质量判断|求职|招聘|作品集|行业领先|提升效率 \d+%|已投入生产/
+  );
 });
 
 test("the public release is source-visible but not open source", async () => {
@@ -89,4 +92,5 @@ test("the public release is source-visible but not open source", async () => {
   assert.match(readme, /公开可见，但不是开源软件/);
   assert.match(readme, /\[LICENSE\]\(\.\/LICENSE\)/);
   assert.match(readme, /\[第三方 MIT 许可证\]\(\.\/src\/vendor\/html2pdf\.LICENSE\.txt\)/);
+  assert.doesNotMatch(license, /recruitment|portfolio/i);
 });
