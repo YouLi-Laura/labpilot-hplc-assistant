@@ -69,6 +69,8 @@ if (moduleExists) {
     assert.match(html, /未知杂峰&lt;script&gt;/);
     assert.match(html, /Blank &amp; Sample/);
     assert.match(html, /排查流动相污染/);
+    assert.match(html, /决策依据/);
+    assert.doesNotMatch(html, /证据支持：|confidence-badge/);
     assert.doesNotMatch(html, /btn-result-back-edit|btn-export-pdf-report|btn-export-case-json/);
   });
 

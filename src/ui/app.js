@@ -1,11 +1,11 @@
 import { diagnoseHplcIssueV2, primaryAnomalyLabels } from "../engine/diagnoseHplcIssue.js?v=evidence-support-20260808-r3";
 import { demoCaseA } from "../demo/demoCases.js";
-import { bindDirectionExpandControls, renderDiagnosticResult } from "./renderDiagnosticResult.js?v=direct-pdf-20260809-r10";
+import { bindDirectionExpandControls, renderDiagnosticResult } from "./renderDiagnosticResult.js?v=priority-basis-20260826-r20";
 import { step2Questions, step3Questions, validateStep2Answers, getAutoCorrectionNotice, getAutoSyncBlankFields } from "./stepQuestions.js";
 import { createInitialStep3Answers, returnToSystemStatus, showOverview, startNewDiagnosis } from "./navigationState.js?v=overview-workbench-20260809-r13";
 import { visibleAnomalies } from "./productScope.js";
 import { downloadDiagnosticPdf } from "./reportPdf.js?v=diagnosis-pdf-pagination-20260811-r18";
-import { bindOverviewActions, getOverviewMarkup } from "./overviewView.js?v=overview-generic-copy-20260810-r17";
+import { bindOverviewActions, getOverviewMarkup } from "./overviewView.js?v=priority-basis-20260826-r20";
 
 // =============================================================================
 // 应用状态

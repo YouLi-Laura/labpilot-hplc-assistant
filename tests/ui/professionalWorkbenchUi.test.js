@@ -44,6 +44,7 @@ test("keeps result hierarchy and disclosure semantics visually explicit", () => 
   assert.match(styles, /\.direction-evidence-summary\s*\{[^}]*min-height:\s*64px/s);
   assert.match(styles, /\.direction-evidence\[open\]\s+\.direction-evidence-chevron\s*\{[^}]*rotate\(90deg\)/s);
   assert.doesNotMatch(styles, /direction-evidence-icon/);
+  assert.doesNotMatch(styles, /\.confidence-badge|\.confidence-high|\.confidence-mid|\.confidence-low/);
 });
 
 test("defines desktop tablet mobile and PDF-safe boundaries", () => {

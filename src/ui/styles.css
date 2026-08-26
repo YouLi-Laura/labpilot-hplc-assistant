@@ -338,11 +338,6 @@ body {
 .priority-2 { background: #fff7ed; border-color: #fed7aa; color: #9a3412; }
 .priority-3 { background: #f3f4f6; border-color: #e5e7eb; color: #6b7280; }
 
-.confidence-badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: var(--radius-sm); font-size: var(--font-size-xs); font-weight: 500; line-height: 1.4; }
-.confidence-high { background: var(--color-success-bg); color: #166534; }
-.confidence-mid { background: var(--color-warning-bg); color: #92400e; }
-.confidence-low { background: #f3f4f6; color: #6b7280; }
-
 .direction-title { font-size: var(--font-size-lg); font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
 
 /* Collapsed direction */

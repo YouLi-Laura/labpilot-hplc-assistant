@@ -61,6 +61,15 @@ test("the public README explains LabPilot in direct professional language", asyn
     "为什么需要 LabPilot",
     "适合谁使用",
     "核心能力",
+    "研发人员",
+    "含量测定",
+    "杂质分析",
+    "纯度评价",
+    "手性纯度",
+    "分析方法、SOP、仪器资料和历史记录",
+    "先确认影响判断的关键观察",
+    "流程框架可以扩展到 GC",
+    "当前 HPLC 规则不能直接用于 GC",
     "https://youli-laura.github.io/labpilot-hplc-assistant/",
     "确定性规则",
     "不替代 SOP、QA、偏差调查或质量结论",
@@ -72,6 +81,10 @@ test("the public README explains LabPilot in direct professional language", asyn
   assert.doesNotMatch(
     readme,
     /AI 驱动|不调用大模型|大模型生成质量判断|求职|招聘|作品集|行业领先|提升效率 \d+%|已投入生产/
+  );
+  assert.doesNotMatch(
+    readme,
+    /HPLC 分析人员|把关键问题一次问全|优先级不等于证据支持度|证据支持度/
   );
 });
 

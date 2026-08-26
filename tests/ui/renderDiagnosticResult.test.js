@@ -62,8 +62,9 @@ test("renders diagnostic guidance without repeating the collected input summary"
   assert.ok(!html.includes("SST 是否通过？"));
   assert.ok(html.includes("风险等级"));
   assert.ok(html.includes("优先排查方向"));
-  assert.ok(html.includes("优先级表示建议的排查先后顺序"));
-  assert.ok(html.includes("证据支持：较高"));
+  assert.ok(html.includes("优先级表示建议的排查先后；展开“决策依据”可以查看本次判断引用的观察。"));
+  assert.ok(!html.includes("证据支持："));
+  assert.ok(!html.includes("confidence-badge"));
   assert.ok(html.includes("决策依据"));
   assert.ok(html.includes("系统综合 1 项关键观察形成此排查方向"));
   assert.ok(html.includes("查看推理依据"));
@@ -128,6 +129,8 @@ test("renders collapsed direction controls without CSP-blocked inline event hand
   );
   assert.ok(html.includes('<span class="direction-expand-label">展开详情</span>'));
   assert.ok(html.includes('<div class="direction-body-collapse" id="direction-2-details">'));
+  assert.ok(!html.includes("证据支持："));
+  assert.ok(!html.includes("confidence-badge"));
 });
 
 test("external result binding toggles direction details, label, and ARIA state", () => {
@@ -197,12 +200,12 @@ test("cache-busts every asset involved in the evidence disclosure UI", () => {
   const appSource = readFileSync(new URL("../../src/ui/app.js", import.meta.url), "utf8");
   const engineSource = readFileSync(new URL("../../src/engine/diagnoseHplcIssue.js", import.meta.url), "utf8");
   const navigationSource = readFileSync(new URL("../../src/ui/navigationState.js", import.meta.url), "utf8");
-  const styleAssetVersion = "form-option-spacing-20260812-r19";
-  const appAssetVersion = "diagnosis-pdf-pagination-20260811-r18";
-  const resultModuleVersion = "direct-pdf-20260809-r10";
+  const styleAssetVersion = "priority-basis-20260826-r20";
+  const appAssetVersion = "priority-basis-20260826-r20";
+  const resultModuleVersion = "priority-basis-20260826-r20";
   const reportPdfModuleVersion = "diagnosis-pdf-pagination-20260811-r18";
   const navigationModuleVersion = "overview-workbench-20260809-r13";
-  const overviewModuleVersion = "overview-generic-copy-20260810-r17";
+  const overviewModuleVersion = "priority-basis-20260826-r20";
   const logicAssetVersion = "evidence-support-20260808-r3";
 
   assert.ok(indexHtml.includes(`styles.css?v=${styleAssetVersion}`));
@@ -288,5 +291,7 @@ test("renders v2 result with compliance banner", () => {
 
   const html = renderDiagnosticResult(v2Result);
   assert.ok(html.includes("优先 1"));
-  assert.ok(html.includes("较高") || html.includes("中等") || html.includes("较低"));
+  assert.ok(v2Result.topDirections.every((direction) => ["较高", "中等", "较低"].includes(direction.confidence)));
+  assert.ok(!html.includes("证据支持："));
+  assert.ok(!html.includes("confidence-badge"));
 });

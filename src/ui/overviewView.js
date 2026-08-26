@@ -7,8 +7,8 @@ const workflowSteps = Object.freeze([
 
 const outputCapabilities = Object.freeze([
   Object.freeze({ title: "排查优先级", description: "明确先处理什么，以及后续应转向哪里。" }),
-  Object.freeze({ title: "证据支持度", description: "区分执行顺序与当前观察对方向的支持程度。" }),
-  Object.freeze({ title: "决策依据", description: "按需展开纳入判断的关键实验室观察。" }),
+  Object.freeze({ title: "决策依据", description: "每个方向都可以回看本次判断引用的具体观察。" }),
+  Object.freeze({ title: "操作后判断", description: "分别说明异常改善或消失、异常仍然存在时如何继续。" }),
   Object.freeze({ title: "建议与报告", description: "提供单变量排查建议、结果判断和 PDF 报告。" }),
 ]);
 

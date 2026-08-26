@@ -64,8 +64,8 @@ test("responsive option layout is external and public shell asset URLs are refre
     /@media\s*\(min-width:\s*681px\)[\s\S]*?\.radio-group\.inline-options,[\s\S]*?\.checkbox-group\.inline-options\s*\{[\s\S]*?flex-direction:\s*row\s*!important;[\s\S]*?flex-wrap:\s*wrap\s*!important;[\s\S]*?gap:\s*4px\s+32px\s*!important;/
   );
 
-  const styleAssetVersion = "form-option-spacing-20260812-r19";
-  const appAssetVersion = "diagnosis-pdf-pagination-20260811-r18";
+  const styleAssetVersion = "priority-basis-20260826-r20";
+  const appAssetVersion = "priority-basis-20260826-r20";
   assert.ok(indexHtml.includes(`styles.css?v=${styleAssetVersion}`));
   assert.ok(indexHtml.includes(`app.js?v=${appAssetVersion}`));
 });

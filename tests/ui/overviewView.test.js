@@ -30,8 +30,11 @@ test("renders a task-focused overview without case loading or version scope copy
   assert.match(html, /系统状态/);
   assert.match(html, /排查结果/);
   assert.match(html, /优先级/);
-  assert.match(html, /证据支持度/);
-  assert.match(html, /决策依据/);
+  assert.doesNotMatch(html, /证据支持度/);
+  assert.equal((html.match(/<strong>决策依据<\/strong>/g) ?? []).length, 1);
+  assert.match(html, /操作后判断/);
+  assert.match(html, /异常改善或消失/);
+  assert.match(html, /异常仍然存在/);
   assert.match(html, /PDF 报告/);
   assert.match(html, /不替代 SOP、QA、偏差调查或质量结论/);
   assert.doesNotMatch(html, /已完成案例|平均提效|近期记录|趋势图/);

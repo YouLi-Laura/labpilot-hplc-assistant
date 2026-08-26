@@ -33,16 +33,6 @@ export function bindDirectionExpandControls(container) {
   });
 }
 
-function renderConfidenceBadge(confidence) {
-  const map = {
-    '较高': 'confidence-high',
-    '中等': 'confidence-mid',
-    '较低': 'confidence-low'
-  };
-  const cls = map[confidence] || 'confidence-mid';
-  return `<span class="confidence-badge ${cls}">证据支持：${escapeHtml(confidence)}</span>`;
-}
-
 function renderPriorityBadge(priority) {
   return `<span class="priority-badge priority-${priority}">优先 ${priority}</span>`;
 }
@@ -131,7 +121,6 @@ function renderDirectionCard(direction, index) {
       <div class="direction-card" id="${cardId}">
         <div class="direction-card-header">
           ${renderPriorityBadge(priority)}
-          ${renderConfidenceBadge(direction.confidence)}
         </div>
         <h3 class="direction-title">${escapeHtml(direction.title)}</h3>
         ${renderDirectionBody(direction)}
@@ -144,7 +133,6 @@ function renderDirectionCard(direction, index) {
     <div class="direction-card direction-collapsible" id="${cardId}">
       <div class="direction-card-header">
         ${renderPriorityBadge(priority)}
-        ${renderConfidenceBadge(direction.confidence)}
       </div>
       <h3 class="direction-title">${escapeHtml(direction.title)}</h3>
       <p class="direction-summary-line">${escapeHtml(direction.summaryLine)}</p>
@@ -248,7 +236,6 @@ function renderOtherDirections(otherDirections) {
   const items = otherDirections.map((d) => `
     <div class="other-direction">
       <div class="other-direction-header">
-        ${renderConfidenceBadge(d.confidence)}
         <span class="other-direction-title">${escapeHtml(d.title)}</span>
       </div>
       ${d.summaryLine ? `<p class="direction-summary-line">${escapeHtml(d.summaryLine)}</p>` : ''}
@@ -292,7 +279,7 @@ export function renderDiagnosticResult(result, { includeToolbar = true } = {}) {
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
         优先排查方向
       </h2>
-      <p class="direction-scale-note">优先级表示建议的排查先后顺序；证据支持度表示当前输入对该方向的支持强弱。</p>
+      <p class="direction-scale-note">优先级表示建议的排查先后；展开“决策依据”可以查看本次判断引用的观察。</p>
       <div class="direction-cards">
         ${result.topDirections.map((d, i) => renderDirectionCard(d, i)).join('')}
       </div>
