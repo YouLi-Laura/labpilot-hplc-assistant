@@ -71,8 +71,8 @@ test("the public README explains LabPilot in direct professional language", asyn
     "验证范围与当前边界",
     "自动化测试验证规则和交互按设计运行",
     "不证明实际实验效率提升",
-    "docs/images/labpilot-input.jpg",
-    "docs/images/labpilot-result.jpg",
+    "docs/images/labpilot-input.png",
+    "docs/images/labpilot-result.png",
     "研发人员",
     "输入冲突检查",
     "https://youli-laura.github.io/labpilot-hplc-assistant/",
@@ -84,8 +84,8 @@ test("the public README explains LabPilot in direct professional language", asyn
   }
 
   for (const relativePath of [
-    "docs/images/labpilot-input.jpg",
-    "docs/images/labpilot-result.jpg",
+    "docs/images/labpilot-input.png",
+    "docs/images/labpilot-result.png",
   ]) {
     await access(path.join(projectRoot, relativePath));
   }

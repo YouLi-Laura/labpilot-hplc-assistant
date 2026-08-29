@@ -18,13 +18,13 @@ HPLC（高效液相色谱）用于分离和分析混合物中的不同成分，�
 
 ### 1. 把异常描述拆成结构化观察
 
-![LabPilot 异常详情页：以虚构案例填写峰位置、保留时间、Blank 和样品关系](./docs/images/labpilot-input.jpg)
+![LabPilot 异常详情页：以虚构案例填写峰位置、保留时间、Blank 和样品关系](./docs/images/labpilot-input.png)
 
 - **输入观察：** 未知峰同时出现在 Blank、Standard 和 Sample，首针 Blank 即明显出现，连续 Blank 峰面积稳定，并且近期重新配制过流动相。
 
 ### 2. 给出优先方向和可继续执行的路径
 
-![LabPilot 排查结果页：展示优先方向、决策依据、建议操作和操作后分支](./docs/images/labpilot-result.jpg)
+![LabPilot 排查结果页：展示优先方向、决策依据、建议操作和操作后分支](./docs/images/labpilot-result.png)
 
 - **优先方向：** 先排查流动相、试剂与容器污染。
 - **后续分支：** 若更换后未知峰消失，则进行单变量复核；若仍然存在，则转向公共流路或进样路径。
