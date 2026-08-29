@@ -1,7 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { access, readFile } from "node:fs/promises";
 import path from "node:path";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
@@ -22,20 +24,14 @@ const forbiddenPatterns = [
   new RegExp(["princeliyou13", "gmail", "com"].join("\\.")),
   new RegExp(["", "chatgpt", "site"].join("\\.")),
 ];
+const execFileAsync = promisify(execFile);
 
-async function walk(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
-  const files = [];
-
-  for (const entry of entries) {
-    if (entry.name === ".git") continue;
-    assert.equal(forbiddenNames.has(entry.name), false, `forbidden public entry: ${entry.name}`);
-    const absolutePath = path.join(directory, entry.name);
-    if (entry.isDirectory()) files.push(...await walk(absolutePath));
-    else files.push(absolutePath);
-  }
-
-  return files;
+async function listTrackedFiles() {
+  const { stdout } = await execFileAsync("git", ["ls-files", "-z"], {
+    cwd: projectRoot,
+    encoding: "utf8",
+  });
+  return stdout.split("\0").filter(Boolean);
 }
 
 test("the public release contains required metadata and no private deployment material", async () => {
@@ -43,12 +39,15 @@ test("the public release contains required metadata and no private deployment ma
     await access(path.join(projectRoot, relativePath));
   }
 
-  const files = await walk(projectRoot);
-  for (const file of files) {
-    if (/html2pdf\.bundle\.min\.js$/.test(file)) continue;
-    const content = await readFile(file, "utf8");
+  const trackedFiles = await listTrackedFiles();
+  for (const relativePath of trackedFiles) {
+    for (const segment of relativePath.split("/")) {
+      assert.equal(forbiddenNames.has(segment), false, `forbidden public entry: ${relativePath}`);
+    }
+    if (/html2pdf\.bundle\.min\.js$/.test(relativePath)) continue;
+    const content = await readFile(path.join(projectRoot, relativePath), "utf8");
     for (const pattern of forbiddenPatterns) {
-      assert.doesNotMatch(content, pattern, `${path.relative(projectRoot, file)} contains ${pattern}`);
+      assert.doesNotMatch(content, pattern, `${relativePath} contains ${pattern}`);
     }
   }
 });
@@ -57,27 +56,38 @@ test("the public README explains LabPilot in direct professional language", asyn
   const readme = await readFile(path.join(projectRoot, "README.md"), "utf8");
 
   for (const requiredCopy of [
-    "HPLC 是什么",
-    "为什么需要 LabPilot",
-    "适合谁使用",
-    "核心能力",
+    "项目概览",
+    "当前实现：未知杂峰",
+    "我的职责与协作方式",
+    "AI 编程工具参与前端实现、自动化测试与文案迭代",
+    "从一次虚构案例看完整流程",
+    "输入观察",
+    "优先方向",
+    "后续分支",
+    "三个关键产品决策",
+    "按判断依赖分步采集",
+    "首屏最多展示三个优先方向",
+    "建议必须能回看，也必须能继续",
+    "验证范围与当前边界",
+    "自动化测试验证规则和交互按设计运行",
+    "不证明实际实验效率提升",
+    "docs/images/labpilot-input.jpg",
+    "docs/images/labpilot-result.jpg",
     "研发人员",
-    "含量测定",
-    "杂质分析",
-    "纯度评价",
-    "手性纯度",
-    "分析方法、SOP、仪器资料和历史记录",
-    "先确认影响判断的关键观察",
-    "不只是给出一串可能原因",
     "输入冲突检查",
-    "一次性答案",
-    "可以执行、复核和留存的排查路径",
     "https://youli-laura.github.io/labpilot-hplc-assistant/",
     "确定性规则",
     "不替代 SOP、QA、偏差调查或质量结论",
     "Copyright © 2026 You.Li. All rights reserved.",
   ]) {
     assert.ok(readme.includes(requiredCopy), `README is missing: ${requiredCopy}`);
+  }
+
+  for (const relativePath of [
+    "docs/images/labpilot-input.jpg",
+    "docs/images/labpilot-result.jpg",
+  ]) {
+    await access(path.join(projectRoot, relativePath));
   }
 
   assert.doesNotMatch(
@@ -91,6 +101,14 @@ test("the public README explains LabPilot in direct professional language", asyn
   assert.doesNotMatch(
     readme,
     /结构确证|流程框架可以扩展到 GC|当前 HPLC 规则不能直接用于 GC|相比 ChatGPT|ChatGPT 做不到|不调用大模型/
+  );
+  assert.doesNotMatch(
+    readme,
+    /^## (为什么需要 LabPilot？|不只是给出一串可能原因|产品定位|核心能力|专业边界与设计原则)$/m
+  );
+  assert.doesNotMatch(
+    readme,
+    /图片识别|上传色谱图|大模型接入|Agent 能力|当前支持 GC|节省 \d+%|准确率 \d+%/
   );
 });
 
